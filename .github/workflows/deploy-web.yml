@@ -36,6 +36,7 @@ jobs:
         working-directory: ./web
         run: |
           npm install
+          npm audit fix || true
           npm run build
 
       - name: Setup Pages
