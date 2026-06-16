@@ -1,0 +1,6 @@
+{
+  "name": "Freque",
+  "description": "Интерактивная визуализация идей Частотной Космологии",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
