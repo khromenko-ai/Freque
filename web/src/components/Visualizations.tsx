@@ -94,7 +94,6 @@ export function NodeVisualization({ nodeId, accentColor }: { nodeId: string, acc
             const sin = Math.sin;
             const exp = Math.exp;
             const abs = Math.abs;
-            const max = Math.max;
 
             const cBase = accentColor;
             const white = '#FFFFFF';
@@ -436,7 +435,6 @@ export function NodeVisualization({ nodeId, accentColor }: { nodeId: string, acc
                 const phase = ((timeMs % 3500) / 3500) * 2 * PI;
                 const symmetryFactor = solvePingPong(timeMs, 6000);
                 
-                const cx = w / 2;
                 const cy = h / 2;
 
                 for (let i = 0; i <= 10; i++) {

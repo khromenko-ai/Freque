@@ -7,7 +7,7 @@ export function WhitePaperReader() {
 
     const tabList = [
         "Аннотация",
-        ...whitePaperSections.map((sec, idx) => `Глава ${idx + 1}`),
+        ...whitePaperSections.map((_, idx) => `Глава ${idx + 1}`),
         "Источники"
     ];
 

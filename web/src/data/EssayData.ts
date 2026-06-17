@@ -2,6 +2,8 @@ export interface EssayChapter {
     title: string;
     subtitle?: string;
     paragraphs: string[];
+    vizId?: string;
+    vizColor?: string;
 }
 
 export const essayIntroduction: EssayChapter = {
