@@ -1,4 +1,3 @@
-import React from 'react';
 import { whitePaperTitle, whitePaperSubtitle, whitePaperAnnotation, whitePaperSections, researchReferences } from '../data/WhitePaperData';
 
 export function WhitePaperReader() {

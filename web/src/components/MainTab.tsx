@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { cosmologyNodes } from '../data/CosmologyData';
 import { essayIntroduction, essayChapters, essayConclusion } from '../data/EssayData';
 

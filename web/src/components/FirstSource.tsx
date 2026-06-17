@@ -1,4 +1,3 @@
-import React from 'react';
 import { firstSourceTitle, firstSourceIntroduction, firstSourceSections } from '../data/FirstSourceData';
 
 export function FirstSourceReader() {

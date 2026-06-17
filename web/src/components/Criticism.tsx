@@ -1,4 +1,3 @@
-import React from 'react';
 import { journalName, reviewerName, criticismIntro, criticismItems } from '../data/CriticismData';
 
 export function Criticism() {
