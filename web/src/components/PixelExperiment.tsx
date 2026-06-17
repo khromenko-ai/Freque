@@ -110,8 +110,10 @@ export function PixelExperiment() {
                 Этот эксперимент проверяет гипотезу голографических подобий. Увеличение разрешения одного «пикселя» раскрывает рекурсивные структуры (фрактальные гармоники), показывая, что макро и микро уровни вложены.
             </p>
 
-            <div style={{ flex: 1, border: '1px solid #F43F5E40', borderRadius: '16px', overflow: 'hidden', minHeight: '300px' }}>
-                <PixelFractalViz color="#F43F5E" zoomFactor={zoomFactor} />
+            <div style={{ flex: 1, position: 'relative', border: '1px solid #F43F5E40', borderRadius: '16px', overflow: 'hidden', minHeight: '300px' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+                    <PixelFractalViz color="#F43F5E" zoomFactor={zoomFactor} />
+                </div>
             </div>
 
             <div style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
