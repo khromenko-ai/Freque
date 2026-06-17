@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.BlendMode
@@ -15,6 +16,8 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.compose.ui.graphics.drawscope.scale
 import kotlin.math.*
 
 @Composable
@@ -1417,6 +1420,66 @@ fun HolographicHorizonViz(color: Color) {
             radius = 10f,
             center = Offset(cx, cy)
         )
+    }
+}
+
+@Composable
+fun PixelFractalViz(color: Color, zoomFactor: Float) {
+    val infiniteTransition = rememberInfiniteTransition()
+    val time by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(4000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        )
+    )
+
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val w = size.width
+        val h = size.height
+        val cx = w / 2f
+        val cy = h / 2f
+        val baseSize = kotlin.math.min(w, h) * 0.8f
+
+        fun drawFractal(x: Float, y: Float, sz: Float, depth: Int, maxDepth: Int) {
+            if (depth > maxDepth || sz < 1f) return
+            
+            drawRoundRect(
+                color = color.copy(alpha = 0.3f / (depth + 1)),
+                topLeft = Offset(x - sz / 2, y - sz / 2),
+                size = Size(sz, sz),
+                cornerRadius = CornerRadius(sz * 0.1f, sz * 0.1f),
+                style = Stroke(width = kotlin.math.max(1f, sz * 0.02f))
+            )
+            
+            val subSz = sz / 3f
+            for (i in -1..1) {
+                for (j in -1..1) {
+                    val px = x + i * subSz
+                    val py = y + j * subSz
+                    if (i == 0 && j == 0) {
+                        drawFractal(px, py, subSz, depth + 1, maxDepth)
+                    } else {
+                        val pulse = (kotlin.math.sin(time * 2 * Math.PI + depth + i + j).toFloat() + 1f) / 2f
+                        drawCircle(
+                            color = color.copy(alpha = 0.5f * pulse),
+                            center = Offset(px, py),
+                            radius = subSz * 0.3f
+                        )
+                    }
+                }
+            }
+        }
+
+        withTransform({
+            translate(left = cx, top = cy)
+            scale(scaleX = zoomFactor, scaleY = zoomFactor)
+            translate(left = -cx, top = -cy)
+        }) {
+            val maxDepth = (kotlin.math.log(zoomFactor.toDouble() + 1.0, 3.0) * 2 + 2).toInt()
+            drawFractal(cx, cy, baseSize, 0, maxDepth)
+        }
     }
 }
 

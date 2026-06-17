@@ -3,6 +3,7 @@ import { FirstSourceReader } from './components/FirstSource';
 import { MainTabWorkspace } from './components/MainTab';
 import { WhitePaperReader } from './components/WhitePaper';
 import { Criticism } from './components/Criticism';
+import { PixelExperiment } from './components/PixelExperiment';
 
 function App() {
   const [selectedTab, setSelectedTab] = useState(1);
@@ -20,6 +21,7 @@ function App() {
     { id: 1, title: 'Основной', icon: '🧭', color: '#00BCD4', desc: 'Основной раздел: интерактивные исследования и эссе.' },
     { id: 2, title: 'Контекст', icon: '📚', color: '#E040FB', desc: 'Манифест проекта и общий контекст экосистемы.' },
     { id: 3, title: 'Критика', icon: '⚖️', color: '#FF9800', desc: 'Научная критика, анализ и дискуссионные материалы.' },
+    { id: 4, title: 'Эксперимент', icon: '🔬', color: '#F43F5E', desc: 'Эксперимент с масштабированием пиксельного изображения.' },
   ];
 
   return (
@@ -92,6 +94,7 @@ function App() {
           {selectedTab === 1 && <MainTabWorkspace />}
           {selectedTab === 2 && <WhitePaperReader />}
           {selectedTab === 3 && <Criticism />}
+          {selectedTab === 4 && <PixelExperiment />}
         </section>
       </main>
 

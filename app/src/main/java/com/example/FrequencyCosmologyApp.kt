@@ -173,6 +173,18 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                             unselectedTextColor = Color.LightGray
                         )
                     )
+                    NavigationRailItem(
+                        selected = selectedTab == 4,
+                        onClick = { selectedTab = 4 },
+                        icon = { Icon(Icons.Default.Science, contentDescription = "Эксперимент") },
+                        label = { Text("Эксперимент", style = MaterialTheme.typography.labelSmall) },
+                        colors = NavigationRailItemDefaults.colors(
+                            selectedIconColor = Color(0xFFF43F5E),
+                            selectedTextColor = Color(0xFFF43F5E),
+                            unselectedIconColor = Color.LightGray,
+                            unselectedTextColor = Color.LightGray
+                        )
+                    )
                 }
 
                 Box(
@@ -185,6 +197,7 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                         1 -> MainTabWorkspace(playSpeech = playSpeech, isPlayingGlobal = isPlayingGlobal, runningTtsId = runningTtsId)
                         2 -> WhitePaperReader(playSpeech = playSpeech, isPlayingGlobal = isPlayingGlobal, runningTtsId = runningTtsId)
                         3 -> ScientificCriticismScreen(playSpeech = playSpeech, isPlayingGlobal = isPlayingGlobal, runningTtsId = runningTtsId)
+                        4 -> PixelExperimentScreen()
                     }
                 }
             }
@@ -260,6 +273,18 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                                 unselectedTextColor = Color.LightGray
                             )
                         )
+                        NavigationBarItem(
+                            selected = selectedTab == 4,
+                            onClick = { selectedTab = 4 },
+                            icon = { Icon(Icons.Default.Science, contentDescription = "Эксперимент") },
+                            label = { Text("Эксперимент", style = MaterialTheme.typography.labelSmall) },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Color(0xFFF43F5E),
+                                selectedTextColor = Color(0xFFF43F5E),
+                                unselectedIconColor = Color.LightGray,
+                                unselectedTextColor = Color.LightGray
+                            )
+                        )
                     }
                 }
             ) { paddingValues ->
@@ -273,6 +298,7 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                         1 -> MainTabWorkspace(playSpeech = playSpeech, isPlayingGlobal = isPlayingGlobal, runningTtsId = runningTtsId)
                         2 -> WhitePaperReader(playSpeech = playSpeech, isPlayingGlobal = isPlayingGlobal, runningTtsId = runningTtsId)
                         3 -> ScientificCriticismScreen(playSpeech = playSpeech, isPlayingGlobal = isPlayingGlobal, runningTtsId = runningTtsId)
+                        4 -> PixelExperimentScreen()
                     }
                 }
             }
@@ -2303,5 +2329,45 @@ fun NewSynthesisScreen(
 
             Spacer(modifier = Modifier.height(84.dp))
         }
+    }
+}
+
+@Composable
+fun PixelExperimentScreen() {
+    var zoomFactor by remember { mutableFloatStateOf(1f) }
+    
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Text("Эксперимент", style = MaterialTheme.typography.titleLarge, color = Color(0xFFF43F5E), fontWeight = FontWeight.Bold)
+        Text("«Увеличение разрешения пикселя»", style = MaterialTheme.typography.titleMedium, color = Color.White, modifier = Modifier.padding(top = 4.dp, bottom = 8.dp))
+        Text(
+            text = "Этот эксперимент проверяет гипотезу голографических подобий. Увеличение разрешения одного «пикселя» раскрывает рекурсивные структуры (фрактальные гармоники), показывая, что макро и микро уровни вложены.",
+            color = Color.LightGray,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        
+        Box(modifier = Modifier
+            .weight(1f)
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .background(Color(0xFF0F172A))
+            .border(1.dp, Color(0xFFF43F5E).copy(alpha = 0.3f), RoundedCornerShape(16.dp))
+        ) {
+            PixelFractalViz(color = Color(0xFFF43F5E), zoomFactor = zoomFactor)
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("Увеличение:", color = Color.White, modifier = Modifier.width(100.dp))
+            Slider(
+                value = zoomFactor,
+                onValueChange = { zoomFactor = it },
+                valueRange = 1f..10f,
+                colors = SliderDefaults.colors(thumbColor = Color(0xFFF43F5E), activeTrackColor = Color(0xFFF43F5E)),
+                modifier = Modifier.weight(1f)
+            )
+            Text(String.format(java.util.Locale.US, "%.1fx", zoomFactor), color = Color(0xFFF43F5E), modifier = Modifier.width(48.dp), textAlign = TextAlign.End)
+        }
+        Text("Используйте ползунок для рекурсивного масштабирования", color = Color.Gray, style = MaterialTheme.typography.bodySmall, modifier = Modifier.align(Alignment.CenterHorizontally))
     }
 }
