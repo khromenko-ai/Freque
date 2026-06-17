@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { cosmologyNodes } from '../data/CosmologyData';
 import { essayIntroduction, essayChapters, essayConclusion } from '../data/EssayData';
+import { NodeVisualization } from './Visualizations';
 
 export function MainTabWorkspace() {
     const [activeTab, setActiveTab] = useState<'map' | 'essay'>('map');
@@ -45,6 +46,9 @@ export function MainTabWorkspace() {
                     {cosmologyNodes.map(node => (
                         <div key={node.id} style={{ backgroundColor: '#0f172a', padding: '1.5rem', borderRadius: '16px', border: `1px solid ${node.accentColor}40`, borderTop: `4px solid ${node.accentColor}` }}>
                             <h3 style={{ color: node.accentColor, marginTop: 0 }}>{node.title}</h3>
+                            <div style={{ width: '100%', height: '180px', marginBottom: '1.5rem', borderRadius: '12px', overflow: 'hidden' }}>
+                                <NodeVisualization nodeId={node.id} accentColor={node.accentColor} />
+                            </div>
                             <p style={{ color: '#cbd5e1', lineHeight: '1.6' }}>{node.description}</p>
                             <blockquote style={{ margin: '1rem 0 0', paddingLeft: '1rem', borderLeft: `2px solid ${node.accentColor}80`, color: '#94a3b8', fontStyle: 'italic', fontSize: '0.9rem' }}>
                                 {node.quote}
@@ -72,6 +76,13 @@ export function MainTabWorkspace() {
                             <div key={idx}>
                                 <h4 style={{ color: '#00BCD4', fontSize: '1.8rem', margin: '0 0 0.5rem 0' }}>{chapter.title}</h4>
                                 {chapter.subtitle && <h5 style={{ color: '#94a3b8', fontSize: '1.2rem', margin: '0 0 1.5rem 0', fontWeight: 'normal' }}>{chapter.subtitle}</h5>}
+                                
+                                {chapter.vizId && (
+                                    <div style={{ width: '100%', height: '240px', marginBottom: '2rem', borderRadius: '16px', overflow: 'hidden', border: '1px solid #334155' }}>
+                                        <NodeVisualization nodeId={chapter.vizId} accentColor={chapter.vizColor || '#00BCD4'} />
+                                    </div>
+                                )}
+                                
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                     {chapter.paragraphs.map((p, pIdx) => (
                                         <p key={pIdx} style={{ color: '#cbd5e1', lineHeight: '1.8', margin: 0, fontSize: '1.1rem' }}>{p}</p>

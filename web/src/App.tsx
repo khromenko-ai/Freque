@@ -41,21 +41,6 @@ function App() {
         bottom: 0,
         zIndex: 10
       }}>
-        {/* Map FAB (Only on desktop or placed differently on mobile) */}
-        {!isMobile && (
-          <button 
-            style={{ 
-              backgroundColor: '#00BCD4', color: 'white', border: 'none', borderRadius: '16px', 
-              width: '56px', height: '56px', cursor: 'pointer', fontSize: '1.5rem', marginBottom: '3rem',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-            }}
-            title="Карта смыслов"
-            onClick={() => alert('Интерактивная карта смыслов будет портирована сюда.')}
-          >
-            🗺️
-          </button>
-        )}
-
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -109,22 +94,6 @@ function App() {
           {selectedTab === 3 && <Criticism />}
         </section>
       </main>
-
-      {/* Mobile Map FAB Floating */}
-      {isMobile && (
-        <button 
-          style={{ 
-            backgroundColor: '#00BCD4', color: 'white', border: 'none', borderRadius: '16px', 
-            width: '56px', height: '56px', cursor: 'pointer', fontSize: '1.5rem',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-            position: 'fixed', bottom: '100px', right: '1.5rem', zIndex: 20
-          }}
-          title="Карта смыслов"
-          onClick={() => alert('Интерактивная карта смыслов будет портирована сюда.')}
-        >
-          🗺️
-        </button>
-      )}
 
     </div>
   );

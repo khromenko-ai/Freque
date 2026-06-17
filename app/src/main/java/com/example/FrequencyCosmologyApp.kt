@@ -111,14 +111,6 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                     contentColor = Color.White,
                     header = {
                         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(top = 16.dp, bottom = 32.dp)) {
-                            FloatingActionButton(
-                                onClick = { showGlobalMapDialog = true },
-                                containerColor = Color(0xFF00BCD4),
-                                contentColor = Color.White,
-                                modifier = Modifier.padding(bottom = 16.dp)
-                            ) {
-                                Icon(Icons.Default.Map, contentDescription = "Открыть карту")
-                            }
                             val context = LocalContext.current
                             FloatingActionButton(
                                 onClick = {
@@ -128,7 +120,7 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                                 containerColor = Color(0xFFE040FB),
                                 contentColor = Color.White
                             ) {
-                                Icon(Icons.Default.Language, contentDescription = "Web App")
+                                Icon(Icons.Default.Share, contentDescription = "Web App")
                             }
                         }
                     }
@@ -211,15 +203,8 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                             contentColor = Color.White,
                             modifier = Modifier.padding(bottom = 16.dp)
                         ) {
-                            Icon(Icons.Default.Language, contentDescription = "Web App")
+                            Icon(Icons.Default.Share, contentDescription = "Web App")
                         }
-                        ExtendedFloatingActionButton(
-                            onClick = { showGlobalMapDialog = true },
-                            containerColor = Color(0xFF00BCD4),
-                            contentColor = Color.White,
-                            icon = { Icon(Icons.Default.Map, contentDescription = "Открыть карту") },
-                            text = { Text("Карта смыслов", fontWeight = FontWeight.Bold) }
-                        )
                     }
                 },
                 bottomBar = {
