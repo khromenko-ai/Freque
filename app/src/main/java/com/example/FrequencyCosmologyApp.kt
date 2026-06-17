@@ -1,7 +1,10 @@
 package com.example
 
+import android.content.Intent
+import android.net.Uri
 import android.speech.tts.TextToSpeech
 import androidx.compose.animation.*
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -14,6 +17,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.LibraryBooks
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
@@ -105,20 +110,33 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                     containerColor = Color(0xFF1E293B),
                     contentColor = Color.White,
                     header = {
-                        FloatingActionButton(
-                            onClick = { showGlobalMapDialog = true },
-                            containerColor = Color(0xFF00BCD4),
-                            contentColor = Color.White,
-                            modifier = Modifier.padding(top = 16.dp, bottom = 32.dp)
-                        ) {
-                            Icon(Icons.Default.Map, contentDescription = "Открыть карту")
+                        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(top = 16.dp, bottom = 32.dp)) {
+                            FloatingActionButton(
+                                onClick = { showGlobalMapDialog = true },
+                                containerColor = Color(0xFF00BCD4),
+                                contentColor = Color.White,
+                                modifier = Modifier.padding(bottom = 16.dp)
+                            ) {
+                                Icon(Icons.Default.Map, contentDescription = "Открыть карту")
+                            }
+                            val context = LocalContext.current
+                            FloatingActionButton(
+                                onClick = {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://khromenko-ai.github.io/Freque/"))
+                                    context.startActivity(intent)
+                                },
+                                containerColor = Color(0xFFE040FB),
+                                contentColor = Color.White
+                            ) {
+                                Icon(Icons.Default.Language, contentDescription = "Web App")
+                            }
                         }
                     }
                 ) {
                     NavigationRailItem(
                         selected = selectedTab == 0,
                         onClick = { selectedTab = 0 },
-                        icon = { Icon(Icons.Default.MenuBook, contentDescription = "Базовый обзор") },
+                        icon = { Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = "Базовый обзор") },
                         label = { Text("Базовый", style = MaterialTheme.typography.labelSmall) },
                         colors = NavigationRailItemDefaults.colors(
                             selectedIconColor = Color(0xFF4CAF50),
@@ -142,7 +160,7 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                     NavigationRailItem(
                         selected = selectedTab == 2,
                         onClick = { selectedTab = 2 },
-                        icon = { Icon(Icons.Default.LibraryBooks, contentDescription = "Манифест и Контекст") },
+                        icon = { Icon(Icons.AutoMirrored.Filled.LibraryBooks, contentDescription = "Манифест и Контекст") },
                         label = { Text("Контекст", style = MaterialTheme.typography.labelSmall) },
                         colors = NavigationRailItemDefaults.colors(
                             selectedIconColor = Color(0xFFE040FB),
@@ -182,13 +200,27 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
             Scaffold(
                 containerColor = Color(0xFF0F172A),
                 floatingActionButton = {
-                    ExtendedFloatingActionButton(
-                        onClick = { showGlobalMapDialog = true },
-                        containerColor = Color(0xFF00BCD4),
-                        contentColor = Color.White,
-                        icon = { Icon(Icons.Default.Map, contentDescription = "Открыть карту") },
-                        text = { Text("Карта смыслов", fontWeight = FontWeight.Bold) }
-                    )
+                    val context = LocalContext.current
+                    Column(horizontalAlignment = Alignment.End) {
+                        FloatingActionButton(
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://khromenko-ai.github.io/Freque/"))
+                                context.startActivity(intent)
+                            },
+                            containerColor = Color(0xFFE040FB),
+                            contentColor = Color.White,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        ) {
+                            Icon(Icons.Default.Language, contentDescription = "Web App")
+                        }
+                        ExtendedFloatingActionButton(
+                            onClick = { showGlobalMapDialog = true },
+                            containerColor = Color(0xFF00BCD4),
+                            contentColor = Color.White,
+                            icon = { Icon(Icons.Default.Map, contentDescription = "Открыть карту") },
+                            text = { Text("Карта смыслов", fontWeight = FontWeight.Bold) }
+                        )
+                    }
                 },
                 bottomBar = {
                     NavigationBar(
@@ -198,7 +230,7 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                         NavigationBarItem(
                             selected = selectedTab == 0,
                             onClick = { selectedTab = 0 },
-                            icon = { Icon(Icons.Default.MenuBook, contentDescription = "Базовый обзор") },
+                            icon = { Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = "Базовый обзор") },
                             label = { Text("Базовый", style = MaterialTheme.typography.labelSmall) },
                             colors = NavigationBarItemDefaults.colors(
                                 selectedIconColor = Color(0xFF4CAF50),
@@ -222,7 +254,7 @@ fun FrequencyCosmologyApp(tts: TextToSpeech?) {
                         NavigationBarItem(
                             selected = selectedTab == 2,
                             onClick = { selectedTab = 2 },
-                            icon = { Icon(Icons.Default.LibraryBooks, contentDescription = "Манифест и Контекст") },
+                            icon = { Icon(Icons.AutoMirrored.Filled.LibraryBooks, contentDescription = "Манифест и Контекст") },
                             label = { Text("Контекст", style = MaterialTheme.typography.labelSmall) },
                             colors = NavigationBarItemDefaults.colors(
                                 selectedIconColor = Color(0xFFE040FB),
